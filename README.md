@@ -180,6 +180,45 @@ Disk identifier: 0x24287bbd
 
 и готов к использованию
 
+Примонтуруем к /mnt/data
+
+[root@mck-network-test mnt]# mount /dev/sdb1 /mnt/data
+[root@mck-network-test mnt]#
+[root@mck-network-test mnt]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 3.9G     0  3.9G   0% /dev
+tmpfs                    3.9G     0  3.9G   0% /dev/shm
+tmpfs                    3.9G   20M  3.9G   1% /run
+tmpfs                    3.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/mapper/centos-root   27G  3.1G   24G  12% /
+/dev/sda1               1014M  198M  817M  20% /boot
+tmpfs                    783M     0  783M   0% /run/user/0
+tmpfs                    783M     0  783M   0% /run/user/26
+overlay                   27G  3.1G   24G  12% /var/lib/docker/overlay2/e5b17778c5a7265816eef0922f4d24a98ce647f86106cbf38331c0d25ef415d5/merged
+/dev/sdb1                 20G   33M   20G   1% /mnt/data
+[root@mck-network-test mnt]#
+
+После ребута раздел слетел, для исправления добавил в файл /etc/fstab
+
+/dev/sdb1 /mnt/data xfs defaults 0 0
+
+После чего ребут прошёл ок
+
+[root@mck-network-test ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 3.9G     0  3.9G   0% /dev
+tmpfs                    3.9G  1.1M  3.9G   1% /dev/shm
+tmpfs                    3.9G   12M  3.9G   1% /run
+tmpfs                    3.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/mapper/centos-root   27G  3.1G   24G  12% /
+/dev/sdb1                 20G   33M   20G   1% /mnt/data
+/dev/sda1               1014M  198M  817M  20% /boot
+tmpfs                    783M     0  783M   0% /run/user/0
+[root@mck-network-test ~]#
+
+
+
+
 
 
 
