@@ -327,51 +327,51 @@ https://dev.to/fitodic/how-to-change-postgresql-s-data-directory-on-linux-2n2b
 1. Развёрнут новый сервер и установдена БД PostgreSQL
 2. Сервис проверен, запущен и остановлен
 
-[root@mck-network-tools ~]# systemctl status postgresql-15
-● postgresql-15.service - PostgreSQL 15 database server
-   Loaded: loaded (/usr/lib/systemd/system/postgresql-15.service; enabled; vendor preset: disabled)
-   Active: inactive (dead) since Sun 2023-12-24 09:22:02 EST; 5s ago
-     Docs: https://www.postgresql.org/docs/15/static/
-  Process: 24850 ExecStart=/usr/pgsql-15/bin/postmaster -D ${PGDATA} (code=exited, status=0/SUCCESS)
-  Process: 24843 ExecStartPre=/usr/pgsql-15/bin/postgresql-15-check-db-dir ${PGDATA} (code=exited, status=0/SUCCESS)
- Main PID: 24850 (code=exited, status=0/SUCCESS)
-
-Dec 24 09:20:41 mck-network-tools.mgc.local systemd[1]: Starting PostgreSQL 15 database server...
-Dec 24 09:20:41 mck-network-tools.mgc.local postmaster[24850]: 2023-12-24 09:20:41.139 EST [24...s
-Dec 24 09:20:41 mck-network-tools.mgc.local postmaster[24850]: 2023-12-24 09:20:41.139 EST [24....
-Dec 24 09:20:41 mck-network-tools.mgc.local systemd[1]: Started PostgreSQL 15 database server.
-Dec 24 09:22:02 mck-network-tools.mgc.local systemd[1]: Stopping PostgreSQL 15 database server...
-Dec 24 09:22:02 mck-network-tools.mgc.local systemd[1]: Stopped PostgreSQL 15 database server.
-Hint: Some lines were ellipsized, use -l to show in full.
-[root@mck-network-tools ~]#
+                      [root@mck-network-tools ~]# systemctl status postgresql-15
+                      ● postgresql-15.service - PostgreSQL 15 database server
+                         Loaded: loaded (/usr/lib/systemd/system/postgresql-15.service; enabled; vendor preset: disabled)
+                         Active: inactive (dead) since Sun 2023-12-24 09:22:02 EST; 5s ago
+                           Docs: https://www.postgresql.org/docs/15/static/
+                        Process: 24850 ExecStart=/usr/pgsql-15/bin/postmaster -D ${PGDATA} (code=exited, status=0/SUCCESS)
+                        Process: 24843 ExecStartPre=/usr/pgsql-15/bin/postgresql-15-check-db-dir ${PGDATA} (code=exited, status=0/SUCCESS)
+                       Main PID: 24850 (code=exited, status=0/SUCCESS)
+                      
+                      Dec 24 09:20:41 mck-network-tools.mgc.local systemd[1]: Starting PostgreSQL 15 database server...
+                      Dec 24 09:20:41 mck-network-tools.mgc.local postmaster[24850]: 2023-12-24 09:20:41.139 EST [24...s
+                      Dec 24 09:20:41 mck-network-tools.mgc.local postmaster[24850]: 2023-12-24 09:20:41.139 EST [24....
+                      Dec 24 09:20:41 mck-network-tools.mgc.local systemd[1]: Started PostgreSQL 15 database server.
+                      Dec 24 09:22:02 mck-network-tools.mgc.local systemd[1]: Stopping PostgreSQL 15 database server...
+                      Dec 24 09:22:02 mck-network-tools.mgc.local systemd[1]: Stopped PostgreSQL 15 database server.
+                      Hint: Some lines were ellipsized, use -l to show in full.
+                      [root@mck-network-tools ~]#
 
 3. Проверяем диски
 
-[root@mck-network-tools etc]# fdisk -l
-
-Disk /dev/sda: 107.4 GB, 107374182400 bytes, 209715200 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk label type: dos
-Disk identifier: 0x000bf923
-
-   Device Boot      Start         End      Blocks   Id  System
-/dev/sda1   *        2048     2099199     1048576   83  Linux
-/dev/sda2         2099200    62914559    30407680   8e  Linux LVM
-
-Disk /dev/mapper/centos-root: 29.0 GB, 28982640640 bytes, 56606720 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/centos-swap: 2147 MB, 2147483648 bytes, 4194304 sectors
-Units = sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-[root@mck-network-tools etc]#
+                      [root@mck-network-tools etc]# fdisk -l
+                      
+                      Disk /dev/sda: 107.4 GB, 107374182400 bytes, 209715200 sectors
+                      Units = sectors of 1 * 512 = 512 bytes
+                      Sector size (logical/physical): 512 bytes / 512 bytes
+                      I/O size (minimum/optimal): 512 bytes / 512 bytes
+                      Disk label type: dos
+                      Disk identifier: 0x000bf923
+                      
+                         Device Boot      Start         End      Blocks   Id  System
+                      /dev/sda1   *        2048     2099199     1048576   83  Linux
+                      /dev/sda2         2099200    62914559    30407680   8e  Linux LVM
+                      
+                      Disk /dev/mapper/centos-root: 29.0 GB, 28982640640 bytes, 56606720 sectors
+                      Units = sectors of 1 * 512 = 512 bytes
+                      Sector size (logical/physical): 512 bytes / 512 bytes
+                      I/O size (minimum/optimal): 512 bytes / 512 bytes
+                      
+                      
+                      Disk /dev/mapper/centos-swap: 2147 MB, 2147483648 bytes, 4194304 sectors
+                      Units = sectors of 1 * 512 = 512 bytes
+                      Sector size (logical/physical): 512 bytes / 512 bytes
+                      I/O size (minimum/optimal): 512 bytes / 512 bytes
+                      
+                      [root@mck-network-tools etc]#
 
 4. Добавление диска
 
