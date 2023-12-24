@@ -217,6 +217,46 @@ tmpfs                    783M     0  783M   0% /run/user/0
 [root@mck-network-test ~]#
 
 
+сделайте пользователя postgres владельцем /mnt/data - chown -R postgres:postgres /mnt/data/
+
+Сделал перенос директории
+
+postgres=# SHOW data_directory;
+     data_directory
+------------------------
+ /var/lib/pgsql/15/data
+(1 row)
+
+mv /var/lib/pgsql/15 /mnt/data
+
+[root@mck-network-test data]# ls -l
+total 0
+drwx------. 4 postgres postgres 51 Dec  1 03:09 15
+[root@mck-network-test data]#
+
+[root@mck-network-test data]# cd /var/lib/pgsql
+[root@mck-network-test pgsql]# ls -l
+total 0
+[root@mck-network-test pgsql]#
+
+Директория действительно переехала
+
+Запускаю базу
+
+[root@mck-network-test postgres]# systemctl start postgresql-15
+Job for postgresql-15.service failed because the control process exited with error code. See "systemctl status postgresql-15.service" and "journalctl -xe" for details.
+[root@mck-network-test postgres]#
+
+
+
+
+
+
+
+
+
+
+
 
 
 
