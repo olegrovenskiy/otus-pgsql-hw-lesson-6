@@ -1,6 +1,6 @@
 # otus-pgsql-hw-lesson-6
 
-Инсталировал PostgreSQL-15 на ВМ в виртуализации VMware, Centos-7, так как это корпоративный стандарт, в компании где работаю.
+##  Инсталировал PostgreSQL-15 на ВМ в виртуализации VMware, Centos-7, так как это корпоративный стандарт, в компании где работаю.
 
 
 1. Centos 7 10.102.6.27
@@ -433,7 +433,8 @@ https://dev.to/fitodic/how-to-change-postgresql-s-data-directory-on-linux-2n2b
                        cat /lib/systemd/system/postgresql-15.service
                       
                        Environment=PGDATA=/mnt/data/15/data/
-7. После чего подключился к БД и убедился что данные с прошлого серовера
+   
+8. После чего подключился к БД и убедился что данные с прошлого серовера находятся в БД
                       
                          [root@mck-network-tools lib]# sudo -u postgres psql
                       psql (15.5)
