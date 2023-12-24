@@ -140,6 +140,58 @@ Hint: Some lines were ellipsized, use -l to show in full.
 [root@mck-network-test postgres]#
 
 
+Добавление диска к ВМ
+
+На Вицентр добавил к ВМ новый диск на 20Г
+
+
+с помошщью fdisk -l видим что диск как устройство появился
+
+Disk /dev/sdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+и через lsblk
+
+[root@mck-network-test postgres]# lsblk
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               8:0    0  100G  0 disk
+├─sda1            8:1    0    1G  0 part /boot
+└─sda2            8:2    0   29G  0 part
+  ├─centos-root 253:0    0   27G  0 lvm  /
+  └─centos-swap 253:1    0    2G  0 lvm  [SWAP]
+sdb               8:16   0   20G  0 disk
+sr0              11:0    1 1024M  0 rom
+
+
+Созданы партиции и диск отформатирован
+
+Disk /dev/sdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x24287bbd
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1            2048    41943039    20970496   83  Linux
+[root@mck-network-test postgres]#
+
+и готов к использованию
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
