@@ -247,10 +247,74 @@ total 0
 Job for postgresql-15.service failed because the control process exited with error code. See "systemctl status postgresql-15.service" and "journalctl -xe" for details.
 [root@mck-network-test postgres]#
 
+Сервис не запустился
+
+https://dev.to/fitodic/how-to-change-postgresql-s-data-directory-on-linux-2n2b
+
+vim /lib/systemd/system/postgresql.service
+
+Environment=PGDATA=/home/pgdata/data
 
 
 
 
+
+root@mck-network-test 15]# systemctl daemon-reload
+[root@mck-network-test 15]#
+[root@mck-network-test 15]# systemctl start postgresql-15
+[root@mck-network-test 15]#
+[root@mck-network-test 15]# systemctl status postgresql-15
+● postgresql-15.service - PostgreSQL 15 database server
+   Loaded: loaded (/usr/lib/systemd/system/postgresql-15.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sun 2023-12-24 08:58:50 EST; 10s ago
+     Docs: https://www.postgresql.org/docs/15/static/
+  Process: 12116 ExecStartPre=/usr/pgsql-15/bin/postgresql-15-check-db-dir ${PGDATA} (code=exited, status=0/SUCCESS)
+ Main PID: 12122 (postmaster)
+    Tasks: 8
+   Memory: 27.3M
+   CGroup: /system.slice/postgresql-15.service
+           ├─12122 /usr/pgsql-15/bin/postmaster -D /mnt/data/15/data/
+           ├─12124 postgres: logger
+           ├─12125 postgres: checkpointer
+           ├─12126 postgres: background writer
+           ├─12128 postgres: walwriter
+           ├─12129 postgres: autovacuum launcher
+           ├─12130 postgres: logical replication launcher
+           └─12138 postgres: postgres postgres 10.102.1.108(35478) idle
+
+Dec 24 08:58:50 mck-network-test.mgc.local systemd[1]: Starting PostgreSQL 15 database server...
+Dec 24 08:58:50 mck-network-test.mgc.local postmaster[12122]: 2023-12-24 08:58:50.817 EST [12122] LOG:  redirecting log output t...ocess
+Dec 24 08:58:50 mck-network-test.mgc.local postmaster[12122]: 2023-12-24 08:58:50.817 EST [12122] HINT:  Future log output will ...log".
+Dec 24 08:58:50 mck-network-test.mgc.local systemd[1]: Started PostgreSQL 15 database server.
+Hint: Some lines were ellipsized, use -l to show in full.
+[root@mck-network-test 15]#
+
+После чего смог подключиться к Базе
+
+[root@mck-network-test 15]# su postgres
+bash-4.2$
+bash-4.2$
+bash-4.2$ psql
+psql (15.5)
+Type "help" for help.
+
+postgres=#
+postgres=#
+postgres=# select * from test;
+ c1
+----
+ 1
+(1 row)
+
+postgres=#
+
+postgres=# SHOW data_directory;
+  data_directory
+-------------------
+ /mnt/data/15/data
+(1 row)
+
+postgres=#
 
 
 
