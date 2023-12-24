@@ -252,12 +252,14 @@ Then in the psql console, change the password and quit:
 /etc/postgresql/15/main  - указанная в задании директоря отсутствует
 
 рекомендации по ссылке:
-
 https://dev.to/fitodic/how-to-change-postgresql-s-data-directory-on-linux-2n2b
+Необходимо в переменной окружения указать новый путь к данным PGSQL
 
                       vim /lib/systemd/system/postgresql-15.service
 
-                      Environment=PGDATA=/home/pgdata/data
+                      Environment=PGDATA=/NEW_PATH
+
+                      Environment=PGDATA=/mnt/data/15/data/
 
 После чего перезагрузка systemctl и сервиса
 
