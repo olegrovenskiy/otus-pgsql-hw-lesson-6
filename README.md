@@ -434,7 +434,7 @@ https://dev.to/fitodic/how-to-change-postgresql-s-data-directory-on-linux-2n2b
                       
                        Environment=PGDATA=/mnt/data/15/data/
    
-8. После чего подключился к БД и убедился что данные с прошлого серовера находятся в БД
+8. После чего рестартанул сервис, подключился к БД и убедился что данные с прошлого серовера находятся в БД
                       
                          [root@mck-network-tools lib]# sudo -u postgres psql
                       psql (15.5)
