@@ -198,9 +198,9 @@ Then in the psql console, change the password and quit:
                       /dev/sdb1                 20G   33M   20G   1% /mnt/data
                       [root@mck-network-test mnt]#
 
-После ребута раздел слетел, для исправления добавил в файл /etc/fstab
+После ребута примонтированный раздел слетел, для исправления добавил в файл /etc/fstab следующую строку:
 
-/dev/sdb1 /mnt/data xfs defaults 0 0
+                      /dev/sdb1 /mnt/data xfs defaults 0 0
 
 После чего ребут прошёл ок
 
@@ -247,11 +247,11 @@ Then in the psql console, change the password and quit:
                       Job for postgresql-15.service failed because the control process exited with error code. See "systemctl status postgresql-15.service" and "journalctl -xe" for details.
                       [root@mck-network-test postgres]#
 
-Сервис не запустился
+База не запустился, причина - не найдена директория с файлами postgresql
 
-/etc/postgresql/15/main  - указанная в задании директоря отсутствует
+/etc/postgresql/15/main  - указанная в задании директоря отсутствует, соответственно использоваться рекомендацией не получается
 
-рекомендации по ссылке:
+Для моего случаая с centos, рекомендации по ссылке:
 https://dev.to/fitodic/how-to-change-postgresql-s-data-directory-on-linux-2n2b
 Необходимо в переменной окружения указать новый путь к данным PGSQL
 
